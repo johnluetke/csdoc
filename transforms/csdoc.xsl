@@ -114,6 +114,13 @@
 		</xsl:element>
 	</xsl:template>
 
+	<!-- Matches the remarks node of the C# doc file -->
+	<xsl:template match="remarks">
+		<xsl:element name="description">
+			<xsl:value-of select="normalize-space(.)"/>
+		</xsl:element>
+	</xsl:template>
+
 	<!-- Matches the param node of the C# doc file -->
 	<xsl:template match="param">
 		<xsl:param name="type">UNKNOWN</xsl:param>
