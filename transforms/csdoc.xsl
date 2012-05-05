@@ -156,6 +156,15 @@
 		</xsl:element>
 	</xsl:template>
 
+	<xsl:template match="exception">
+		<xsl:element name="exception">
+			<xsl:attribute name="type">
+				<xsl:value-of select="substring-after(@cref, ':')" />
+			</xsl:attribute>
+			<xsl:value-of select="normalize-space(.)"/>
+		</xsl:element>
+	</xsl:template>
+	
 	<!-- Processes member names with the T: prefix, which are types (classes, enums, etc) -->
 	<xsl:template match="//member[contains(@name,'T:')]">
 		
@@ -332,7 +341,7 @@
 								<!-- usage examples of the method -->
 								<xsl:if test="count(example)!=0">
 									<xsl:element name="throws">
-										<xsl:apply-templates select="example"/>
+										<xsl:apply-templates select="exception"/>
 									</xsl:element>
 								</xsl:if>
 
