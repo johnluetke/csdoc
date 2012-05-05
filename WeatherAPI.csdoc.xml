@@ -1,0 +1,72 @@
+<?xml version="1.0" standalone="yes"?>
+<documentation>
+  <assembly name="/Users/jluetke/SkyDrive/Projects/WeatherAPI/bin/Debug/WeatherAPI">
+    <types>
+      <type name="Direction" namespace="WeatherAPI">
+            <summary>Represents the compass directions</summary>
+            <description>Provides the 16 points of direction</description>
+        </type>
+      <type name="IWeather" namespace="WeatherAPI">
+            <summary>Interface for obtaining weather information from an abstracted service</summary>
+        <properties><property name="DegreesCelcius">
+            <summary>Gets the degrees in Celcius at the time of the last update.</summary>
+            <return>The degrees in Celcius.</return>
+        </property><property name="DegressFahrienhiet">
+            <summary>Gets the degress in Fahrienhiet at the time of the last update.</summary>
+            <return>The degress in Fahrienhiet.</return>
+        </property><property name="WindSpeedMPH">
+            <summary>Gets the wind speed in miles per hour at the time of the last update.</summary>
+            <return>The wind speed in MPH.</return>
+        </property><property name="WindSpeedKPH">
+            <summary>Gets the wind speed in kilometers per hour at the time of the last update.</summary>
+            <return>The wind speed in KPH.</return>
+        </property><property name="WindDirection">
+            <summary>Gets the wind direction at the time of the last update.</summary>
+            <return>The wind direction.</return>
+        </property><property name="CloudCover">
+            <summary>Gets the cloud cover at the time of the last update.</summary>
+            <description>The value returned is a percentage. 0 is no clouds, 100 is overcast.</description>
+            <return>The cloud cover.</return>
+        </property><property name="Percipitation">
+            <summary>Gets the percipitation in millimeters at the time of the last update.</summary>
+            <return>The percipitation in millimeters</return>
+        </property><property name="Humidity">
+            <summary>Gets the humidity at the time of the last update.</summary>
+            <return>The humidity.</return>
+        </property><property name="Conditions">
+            <summary>Gets the weather conditions at the time of the last update.</summary>
+            <return>The weather conditions.</return>
+        </property></properties></type>
+      <type name="WeatherCondition" namespace="WeatherAPI">
+            <summary>Represents different weather conditions. These can be OR'd together to create complex conditions.</summary>
+        </type>
+      <type name="WeatherAPI" namespace="WeatherAPI">
+            <summary>Gateway class to the WeatherAPI.</summary>
+        <methods><method name="GetWeather" constructor="false"><summary>Gets the weather for the given city and state</summary><parameters count="2"><parameter name="city" type="System.String" order="1">City name for which weather information should be retrieved</parameter><parameter name="state" type="System.String" order="2">State name for which weather information should be retrieved</parameter></parameters><return>A class adhereing to IWeather which will contain weather data for the requested location</return></method><method name="GetWeather" constructor="false"><summary>Gets the weather for the given airport code</summary><parameters count="1"><parameter name="airportCode" type="System.String" order="1">The Airport code for which weather information should be retrieved.</parameter></parameters><return>A class adhereing to IWeather which will contain weather data for the requested location</return></method><method name="GetWeather" constructor="false"><summary>Gets the weather for the given ZIP code</summary><parameters count="1"><parameter name="zipCode" type="System.Int32" order="1">The ZIP code for which weather information should be retrieved.</parameter></parameters><return>A class adhereing to IWeather which will contain weather data for the requested location</return></method><method name="GetWeather" constructor="false"><summary>Gets the weather for the given latitude and longitude</summary><parameters count="2"><parameter name="latitude" type="System.Double" order="1">The latitude coordinate for which weather information should be retrieved.</parameter><parameter name="longitude" type="System.Double" order="2">The latitude coordinate for which weather information should be retrieved.</parameter></parameters><return>A class adhereing to IWeather which will contain weather data for the requested location</return></method><method name="getInstance" constructor="false"><summary>Factory method for obtaining an instance of a provider</summary><parameters count="2"><parameter name="sourceType" type="WeatherAPI.Providers.LocationSource" order="1">Type of location that weather data will be retrieved from.</parameter><parameter name="source" type="System.String" order="2">The string value of the source to give to the provider.</parameter></parameters><return>An instance of IWeather containing weather data from the provider.</return><throws><exception type="System.ArgumentException">Is thrown when the provider cannot fetch weather data for the LocationSource provided.</exception></throws></method></methods></type>
+      <type name="WeatherProvider" namespace="WeatherAPI.Providers">
+            <summary>Abstract class for Weather Providers to derive from.</summary>
+        <properties><property name="Location">
+            <summary>Gets or sets the location for the provider to fetch information for.</summary>
+            
+            The location.
+            
+        </property><property name="Source">
+            <summary>Gets or sets the LocationSource for the provider.</summary>
+            
+            The source.
+            
+        </property></properties><methods><method name="Supports" constructor="false"><summary>Determines if the provider supports the specified LocationSource.</summary><parameters count="1"><parameter name="source" type="WeatherAPI.Providers.LocationSource" order="1">The LocationSource to test support for.</parameter></parameters><return>True if the provider supports the given source, false otherwise</return></method></methods></type>
+      <type name="LocationSource" namespace="WeatherAPI.Providers">
+            <summary>Defines the possible locations that may be given to a WeatherProvider for which weather information can be fetched.</summary>
+        <fields><field name="AirportCode">
+            <summary>Airport Code.</summary>
+        </field><field name="ZipCode">
+            <summary>ZIP (Postal) code.</summary>
+        </field><field name="CityState">
+            <summary>City and State.</summary>
+        </field><field name="LatitudeLongitude">
+            <summary>Latitude and Longitude.</summary>
+        </field></fields></type>
+    </types>
+  </assembly>
+</documentation>

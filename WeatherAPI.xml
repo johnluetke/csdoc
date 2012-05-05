@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>/Users/jluetke/SkyDrive/Projects/WeatherAPI/bin/Debug/WeatherAPI</name>
+    </assembly>
+    <members>
+        <member name="T:WeatherAPI.Direction">
+            <summary>
+            Represents the compass directions
+            </summary>
+            <remarks>
+            Provides the 16 points of direction
+            </remarks>
+        </member>
+        <member name="T:WeatherAPI.IWeather">
+            <summary>
+            Interface for obtaining weather information from an abstracted service
+            </summary>
+        </member>
+        <member name="P:WeatherAPI.IWeather.DegreesCelcius">
+            <summary>
+            Gets the degrees in Celcius at the time of the last update.
+            </summary>
+            <returns>
+            The degrees in Celcius.
+            </returns>
+        </member>
+        <member name="P:WeatherAPI.IWeather.DegressFahrienhiet">
+            <summary>
+            Gets the degress in Fahrienhiet at the time of the last update.
+            </summary>
+            <returns>
+            The degress in Fahrienhiet.
+            </returns>
+        </member>
+        <member name="P:WeatherAPI.IWeather.WindSpeedMPH">
+            <summary>
+            Gets the wind speed in miles per hour at the time of the last update.
+            </summary>
+            <returns>
+            The wind speed in MPH.
+            </returns>
+        </member>
+        <member name="P:WeatherAPI.IWeather.WindSpeedKPH">
+            <summary>
+            Gets the wind speed in kilometers per hour at the time of the last update.
+            </summary>
+            <returns>
+            The wind speed in KPH.
+            </returns>
+        </member>
+        <member name="P:WeatherAPI.IWeather.WindDirection">
+            <summary>
+            Gets the wind direction at the time of the last update.
+            </summary>
+            <returns>
+            The wind direction.
+            </returns>
+        </member>
+        <member name="P:WeatherAPI.IWeather.CloudCover">
+            <summary>
+            Gets the cloud cover at the time of the last update.
+            </summary>
+            <remarks>
+            The value returned is a percentage. 0 is no clouds, 100 is overcast.
+            </remarks>
+            <returns>
+            The cloud cover.
+            </returns>
+        </member>
+        <member name="P:WeatherAPI.IWeather.Percipitation">
+            <summary>
+            Gets the percipitation in millimeters at the time of the last update.
+            </summary>
+            <returns>
+            The percipitation in millimeters
+            </returns>
+        </member>
+        <member name="P:WeatherAPI.IWeather.Humidity">
+            <summary>
+            Gets the humidity at the time of the last update.
+            </summary>
+            <returns>
+            The humidity.
+            </returns>
+        </member>
+        <member name="P:WeatherAPI.IWeather.Conditions">
+            <summary>
+            Gets the weather conditions at the time of the last update.
+            </summary>
+            <returns>
+            The weather conditions.
+            </returns>
+        </member>
+        <member name="T:WeatherAPI.WeatherCondition">
+            <summary>
+            Represents different weather conditions. These can be OR'd together to create complex conditions.
+            </summary>
+        </member>
+        <member name="T:WeatherAPI.WeatherAPI">
+            <summary>
+            Gateway class to the WeatherAPI.
+            </summary>
+        </member>
+        <member name="M:WeatherAPI.WeatherAPI.#ctor">
+            <summary>
+            Initializes a new instance of the WeatherAPI class. All providers
+            discovered via reflection and added to a List for use in
+            getInstance
+            </summary>
+        </member>
+        <member name="M:WeatherAPI.WeatherAPI.GetWeather(System.String,System.String)">
+            <summary>
+            Gets the weather for the given city and state
+            </summary>
+            <remarks>
+            This is the most general level for which weather can be retrieved.
+            </remarks>
+            <param name="city">
+            City name for which weather information should be retrieved
+            </param>
+            <param name="state">
+            State name for which weather information should be retrieved
+            </param>
+            <returns>
+            A class adhereing to IWeather which will contain weather data for
+            the requested location
+            </returns>
+        </member>
+        <member name="M:WeatherAPI.WeatherAPI.GetWeather(System.String)">
+            <summary>
+            Gets the weather for the given airport code
+            </summary>
+            <param name="airportCode">
+            The Airport code for which weather information should be retrieved.
+            </param>
+            <returns>
+            A class adhereing to IWeather which will contain weather data for
+            the requested location
+            </returns>
+        </member>
+        <member name="M:WeatherAPI.WeatherAPI.GetWeather(System.Int32)">
+            <summary>
+            Gets the weather for the given ZIP code
+            </summary>
+            <param name="zipCode">
+            The ZIP code for which weather information should be retrieved.
+            </param>
+            <returns>
+            A class adhereing to IWeather which will contain weather data for
+            the requested location
+            </returns>
+        </member>
+        <member name="M:WeatherAPI.WeatherAPI.GetWeather(System.Double,System.Double)">
+            <summary>
+            Gets the weather for the given latitude and longitude
+            </summary>
+            <param name="latitude">
+            The latitude coordinate for which weather information should be
+            retrieved.
+            </param>
+            <param name="longitude">
+            The latitude coordinate for which weather information should be
+            retrieved.
+            </param>
+            <returns>
+            A class adhereing to IWeather which will contain weather data for
+            the requested location
+            </returns>
+        </member>
+        <member name="M:WeatherAPI.WeatherAPI.getInstance(WeatherAPI.Providers.LocationSource,System.String)">
+            <summary>
+            Factory method for obtaining an instance of a provider
+            </summary>
+            <param name="sourceType">
+            Type of location that weather data will be retrieved from.
+            </param>
+            <param name="source">
+            The string value of the source to give to the provider.
+            </param>
+            <returns>
+            An instance of IWeather containing weather data from the provider.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Is thrown when the provider cannot fetch weather data for the
+            LocationSource provided.
+            </exception>
+        </member>
+        <member name="T:WeatherAPI.Providers.WeatherProvider">
+            <summary>
+            Abstract class for Weather Providers to derive from.
+            </summary>
+        </member>
+        <member name="M:WeatherAPI.Providers.WeatherProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WeatherAPI.Providers.WeatherProvider" /> class.
+            </summary>
+        </member>
+        <member name="P:WeatherAPI.Providers.WeatherProvider.Location">
+            <summary>
+            Gets or sets the location for the provider to fetch information for.
+            </summary>
+            <value>
+            The location.
+            </value>
+        </member>
+        <member name="P:WeatherAPI.Providers.WeatherProvider.Source">
+            <summary>
+            Gets or sets the LocationSource for the provider.
+            </summary>
+            <value>
+            The source.
+            </value>
+        </member>
+        <member name="M:WeatherAPI.Providers.WeatherProvider.IsAvailable">
+            <summary>
+            Determines if this provider is available to use.
+            </summary>
+            <returns>
+            Whether or not this provider is available to use
+            </returns>
+        </member>
+        <member name="M:WeatherAPI.Providers.WeatherProvider.Update">
+            <summary>
+            Refresh the weather data behind this interface.
+            </summary>
+        </member>
+        <member name="M:WeatherAPI.Providers.WeatherProvider.Supports(WeatherAPI.Providers.LocationSource)">
+            <summary>
+            Determines if the provider supports the specified LocationSource.
+            </summary>
+            <param name="source">
+            The LocationSource to test support for.
+            </param>
+            <returns>
+            True if the provider supports the given source, false otherwise
+            </returns>
+        </member>
+        <member name="T:WeatherAPI.Providers.LocationSource">
+            <summary>
+            Defines the possible locations that may be given to a WeatherProvider
+            for which weather information can be fetched.
+            </summary>
+        </member>
+        <member name="F:WeatherAPI.Providers.LocationSource.AirportCode">
+            <summary>
+            Airport Code.
+            </summary>
+        </member>
+        <member name="F:WeatherAPI.Providers.LocationSource.ZipCode">
+            <summary>
+            ZIP (Postal) code.
+            </summary>
+        </member>
+        <member name="F:WeatherAPI.Providers.LocationSource.CityState">
+            <summary>
+            City and State.
+            </summary>
+        </member>
+        <member name="F:WeatherAPI.Providers.LocationSource.LatitudeLongitude">
+            <summary>
+            Latitude and Longitude.
+            </summary>
+        </member>
+    </members>
+</doc>
